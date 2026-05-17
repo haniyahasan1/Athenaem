@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(grep -r \"sk_\\\\|pk_\\\\|api_key\\\\|apiKey\\\\|API_KEY\\\\|SECRET\\\\|PRIVATE\" /Users/haniyahasan/Desktop/Athenaem --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" ! -path \"*/node_modules/*\" ! -path \"*/.next/*\")",
+      "Bash(git check-ignore *)",
+      "Bash(grep -rn \"^\\\\s*[A-Z_]*KEY\\\\|^\\\\s*[A-Z_]*SECRET\\\\|^\\\\s*[A-Z_]*TOKEN\\\\|^\\\\s*[A-Z_]*PASSWORD\" /Users/haniyahasan/Desktop/Athenaem --include=\"*.config.js\" --include=\"*.config.ts\" --include=\".env*\" ! -path \"*/node_modules/*\")"
+    ]
+  }
+}

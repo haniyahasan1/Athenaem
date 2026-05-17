@@ -1,0 +1,256 @@
+.hero {
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.heroText {
+  text-align: center;
+}
+
+.phonetic {
+  display: block;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+  transition: opacity 0.8s ease;
+}
+
+.title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: normal;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1;
+}
+
+.tagline {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: #fff;
+  margin-top: 1rem;
+  letter-spacing: 0.15em;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.steps {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.step {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.stepVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stepNumber {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.15em;
+  min-width: 1.5rem;
+}
+
+.stepText {
+  font-family: inherit;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+.heroSignUp {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.6rem 1.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease, color 0.2s, border-color 0.2s;
+}
+
+.heroSignUp:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.4;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.content {
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 2rem;
+  gap: 5rem;
+}
+
+.about {
+  max-width: 620px;
+  text-align: center;
+}
+
+.aboutTitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.aboutText {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+.authButtons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.btnPrimary {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 0.85rem 2.5rem;
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btnPrimary:hover {
+  background-color: #222;
+}
+
+.btnSecondary {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 0.85rem 2.5rem;
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btnSecondary:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.contact {
+  width: 100%;
+  max-width: 540px;
+}
+
+.contactTitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #000;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 0;
+  outline: none;
+  background: #fff;
+  color: #000;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #000;
+}
+
+.textarea {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 0;
+  outline: none;
+  background: #fff;
+  color: #000;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.textarea:focus {
+  border-color: #000;
+}
+
+.submitBtn {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 0.85rem;
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-end;
+  min-width: 140px;
+}
+
+.submitBtn:hover {
+  background-color: #222;
+}
