@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyOTP } from '../../../lib/twilio';
+import { sendSMS } from '../../../lib/twilio';
 import { supabaseAdmin } from '../../../lib/supabase';
 
 export async function POST(req: NextRequest) {
@@ -50,6 +51,8 @@ export async function POST(req: NextRequest) {
 
       userId = newUser.id;
       isNewUser = true;
+
+      sendSMS(phone, `Welcome to Athenaem. Your first article arrives this week — expect something that makes you think differently.\n\nathenaem.app`).catch(() => {});
     }
 
     const response = NextResponse.json({ success: true, isNewUser });
