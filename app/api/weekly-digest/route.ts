@@ -4,11 +4,7 @@ import { fetchArticlesForInterest } from '../../../lib/articles';
 import { generateHook } from '../../../lib/claude';
 import { sendSMS } from '../../../lib/twilio';
 
-export async function POST(req: NextRequest) {
-  const secret = req.headers.get('x-cron-secret');
-  if (secret !== process.env.CRON_SECRET) {
-    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
-  }
+async function runDigest() {
 
   // Get all users
   const { data: users, error: usersError } = await supabaseAdmin
@@ -99,4 +95,20 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json({ success: true, results });
+}
+
+export async function GET(req: NextRequest) {
+  const auth = req.headers.get('authorization');
+  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+  }
+  return runDigest();
+}
+
+export async function POST(req: NextRequest) {
+  const secret = req.headers.get('x-cron-secret');
+  if (secret !== process.env.CRON_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+  }
+  return runDigest();
 }
