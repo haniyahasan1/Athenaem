@@ -13,6 +13,8 @@ export async function generateHook(title: string, abstract: string): Promise<str
 
 Use this exact structure: [Intriguing fact or situation] + [Implication or consequence] + [The thing withheld]. The third part is what you don't say — leave the reader hanging on the most interesting thing. Sound like a smart friend texting you, not a newsletter. Never start with "Discover" or "Explore". Never summarize — hook.
 
+If the abstract is thin or missing, use the title alone to craft the hook. You must always produce a hook — never say you can't or don't have enough information.
+
 Article: ${title}
 Abstract: ${abstract}
 
