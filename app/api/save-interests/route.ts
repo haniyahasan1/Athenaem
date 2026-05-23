@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveUserInterests } from '../../../lib/supabase';
+import { saveUserInterests, getUserById } from '../../../lib/supabase';
+import { sendArticleToUser } from '../../../lib/digest';
 
 export async function POST(req: NextRequest) {
   const userId = req.cookies.get('user_id')?.value;
@@ -18,6 +19,11 @@ export async function POST(req: NextRequest) {
 
   if (error) {
     return NextResponse.json({ error: 'Failed to save interests.' }, { status: 500 });
+  }
+
+  const user = await getUserById(userId);
+  if (user?.phone) {
+    sendArticleToUser(userId, user.phone).catch(console.error);
   }
 
   return NextResponse.json({ success: true });
