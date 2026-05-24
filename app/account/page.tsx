@@ -19,6 +19,7 @@ type Article = {
 type User = {
   phone: string;
   name: string | null;
+  push_count: number;
 };
 
 export default function AccountPage() {
@@ -28,6 +29,8 @@ export default function AccountPage() {
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [pushing, setPushing] = useState(false);
+  const [pushMsg, setPushMsg] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,6 +43,21 @@ export default function AccountPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const handlePush = async () => {
+    setPushing(true);
+    setPushMsg('');
+    const res = await fetch('/api/push-article', { method: 'POST' });
+    const data = await res.json();
+    setPushing(false);
+    if (res.ok) {
+      setPushMsg(`Article sent! ${data.remaining} push${data.remaining === 1 ? '' : 'es'} remaining.`);
+      setTimeout(() => setPushMsg(''), 5000);
+    } else {
+      setPushMsg(data.error ?? 'Something went wrong.');
+      setTimeout(() => setPushMsg(''), 5000);
+    }
+  };
 
   const handleSaveName = async () => {
     setSaving(true);
@@ -102,6 +120,21 @@ export default function AccountPage() {
             </div>
           )}
           {saved && <p className={styles.savedMsg}>Saved!</p>}
+
+          <div style={{ marginTop: '2.5rem' }}>
+            <p className={styles.sidebarLabel}>Push Article</p>
+            <p style={{ fontSize: '0.8rem', color: 'rgba(0,0,0,0.4)', marginBottom: '0.75rem' }}>
+              {5 - (user?.push_count ?? 0)} of 5 pushes remaining
+            </p>
+            <button
+              className={styles.saveBtn}
+              onClick={handlePush}
+              disabled={pushing || (user?.push_count ?? 0) >= 5}
+            >
+              {pushing ? 'Sending...' : 'Send me an article'}
+            </button>
+            {pushMsg && <p className={styles.savedMsg}>{pushMsg}</p>}
+          </div>
         </div>
       </aside>
 
