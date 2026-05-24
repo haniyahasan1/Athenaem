@@ -85,7 +85,7 @@ export default function InterestsPage() {
           Select your fields of interest
         </h1>
         <p className={`${styles.counter} ${titleAtTop ? styles.counterVisible : ''}`}>
-          {selectedCount} selected &mdash; minimum 5
+          {selectedCount} selected &mdash; minimum 2
         </p>
       </div>
 
@@ -134,7 +134,7 @@ export default function InterestsPage() {
         })}
       </div>
 
-      <div className={`${styles.footer} ${selectedCount >= 5 ? styles.footerVisible : ''}`}>
+      <div className={`${styles.footer} ${selectedCount >= 2 ? styles.footerVisible : ''}`}>
         <button className={styles.continueBtn} onClick={() => router.push('/dashboard')}>
           Continue →
         </button>
