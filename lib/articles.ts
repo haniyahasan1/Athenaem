@@ -7,10 +7,17 @@ export type Article = {
 };
 
 const FIELD_QUERIES: Record<string, string> = {
-  engineering: 'engineering technology',
+  chem_eng: 'chemical engineering',
+  civil_eng: 'civil engineering structural',
+  elec_eng: 'electrical engineering electronics',
+  mech_eng: 'mechanical engineering',
+  soft_eng: 'software engineering computer systems',
+  biomed_eng: 'biomedical engineering medical devices',
+  env_eng: 'environmental engineering water treatment',
+  mechatronics: 'mechatronics robotics automation',
   cs: 'computer science',
   medicine: 'medicine clinical health',
-  life: 'biology life sciences',
+  biology: 'biology life sciences',
   psychology: 'psychology behavior',
   neuroscience: 'neuroscience brain',
   physics: 'physics',
