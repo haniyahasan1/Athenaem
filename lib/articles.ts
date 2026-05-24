@@ -54,7 +54,7 @@ export async function fetchArticlesForInterest(
 async function fetchFromCrossRef(query: string): Promise<Article[]> {
   const encoded = encodeURIComponent(query);
   const mailto = process.env.CONTACT_EMAIL ?? '';
-  const url = `https://api.crossref.org/works?query=${encoded}&rows=20${mailto ? `&mailto=${mailto}` : ''}`;
+  const url = `https://api.crossref.org/works?query=${encoded}&rows=20&sort=published&order=desc&filter=from-pub-date:2020${mailto ? `&mailto=${mailto}` : ''}`;
 
   const res = await fetch(url, {
     headers: { 'Accept': 'application/json' },
