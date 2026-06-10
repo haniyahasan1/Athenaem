@@ -31,6 +31,7 @@ export default function AccountPage() {
   const [saved, setSaved] = useState(false);
   const [pushing, setPushing] = useState(false);
   const [pushMsg, setPushMsg] = useState('');
+  const [showUnsub, setShowUnsub] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -43,6 +44,11 @@ export default function AccountPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const handleUnsubscribe = async () => {
+    await fetch('/api/unsubscribe', { method: 'DELETE' });
+    window.location.href = '/gate';
+  };
 
   const handlePush = async () => {
     setPushing(true);
@@ -136,8 +142,41 @@ export default function AccountPage() {
             </button>
             {pushMsg && <p className={styles.savedMsg}>{pushMsg}</p>}
           </div>
+
+          <div style={{ marginTop: 'auto', paddingTop: '3rem' }}>
+            <button
+              onClick={() => setShowUnsub(true)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.8rem', color: 'rgba(0,0,0,0.3)', textDecoration: 'underline', padding: 0 }}
+            >
+              Unsubscribe?
+            </button>
+          </div>
         </div>
       </aside>
+
+      {showUnsub && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
+          <div style={{ background: '#fff', padding: '2.5rem', maxWidth: '380px', width: '90%', fontFamily: 'Times New Roman, serif', textAlign: 'center' }}>
+            <p style={{ fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.6 }}>
+              Are you sure you want to unsubscribe from Athenaem?
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button
+                onClick={handleUnsubscribe}
+                style={{ fontFamily: 'inherit', fontSize: '0.9rem', padding: '0.65rem 2rem', background: '#000', color: '#fff', border: '1px solid #000', cursor: 'pointer' }}
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => setShowUnsub(false)}
+                style={{ fontFamily: 'inherit', fontSize: '0.9rem', padding: '0.65rem 2rem', background: 'transparent', color: '#000', border: '1px solid #000', cursor: 'pointer' }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className={styles.main}>
         <h1 className={styles.title}>Articles Sent</h1>

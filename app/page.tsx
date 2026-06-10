@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import HeroSection from '../components/HeroSection';
+import ContactForm from '../components/ContactForm';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -34,27 +35,7 @@ export default function Home() {
 
         <div id="contact" className={styles.contact}>
           <h2 className={styles.contactTitle}>Get in Touch</h2>
-          <form className={styles.contactForm}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              className={styles.input}
-            />
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              className={styles.input}
-            />
-            <textarea
-              name="message"
-              placeholder="Your message..."
-              className={styles.textarea}
-              rows={5}
-            />
-            <button type="submit" className={styles.submitBtn}>Send</button>
-          </form>
+          <ContactForm />
         </div>
       </section>
     </main>
