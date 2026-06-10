@@ -38,6 +38,7 @@ const FIELDS = [
   { id: 'anthropology', name: 'Anthropology', subs: ['Archaeology', 'Cultural Anthropology', 'Forensic Anthropology', 'Physical Anthropology'] },
   { id: 'linguistics', name: 'Linguistics', subs: ['Computational Linguistics', 'Language Acquisition', 'Phonetics', 'Psycholinguistics', 'Semantics'] },
   { id: 'education', name: 'Education', subs: ['Curriculum Design', 'Early Childhood', 'Educational Psychology', 'Higher Education', 'Special Education'] },
+  { id: 'sociology', name: 'Sociology', subs: ['Crime & Deviance', 'Cultural Sociology', 'Family Studies', 'Health Sociology', 'Inequality & Stratification', 'Religion & Society'] },
 ];
 
 type FieldState = {
@@ -135,7 +136,20 @@ export default function InterestsPage() {
       </div>
 
       <div className={`${styles.footer} ${selectedCount >= 2 ? styles.footerVisible : ''}`}>
-        <button className={styles.continueBtn} onClick={() => router.push('/dashboard')}>
+        <button className={styles.continueBtn} onClick={async () => {
+          const selections: { fieldId: string; fieldName: string; subTopic?: string }[] = [];
+          FIELDS.forEach(field => {
+            const state = fieldStates[field.id];
+            if (state.selected) selections.push({ fieldId: field.id, fieldName: field.name });
+            state.selectedSubs.forEach(sub => selections.push({ fieldId: field.id, fieldName: field.name, subTopic: sub }));
+          });
+          await fetch('/api/save-interests', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ selections }),
+          });
+          router.push('/welcome');
+        }}>
           Continue →
         </button>
       </div>

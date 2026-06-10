@@ -16,9 +16,9 @@ async function runDigest() {
   for (const user of users) {
     try {
       const sent = await sendArticleToUser(user.id, user.phone);
-      results.push({ phone: user.phone, status: sent ? 'sent' : 'skipped' });
+      results.push({ userId: user.id, status: sent ? 'sent' : 'skipped' });
     } catch (err) {
-      results.push({ phone: user.phone, status: 'error', error: String(err) });
+      results.push({ userId: user.id, status: 'error', error: String(err) });
     }
   }
 
@@ -27,7 +27,7 @@ async function runDigest() {
 
 export async function GET(req: NextRequest) {
   const auth = req.headers.get('authorization');
-  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!process.env.CRON_SECRET || auth !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
   }
   return runDigest();
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const secret = req.headers.get('x-cron-secret');
-  if (secret !== process.env.CRON_SECRET) {
+  if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
   }
   return runDigest();

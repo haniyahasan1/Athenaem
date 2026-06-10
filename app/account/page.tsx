@@ -51,6 +51,7 @@ export default function AccountPage() {
     const data = await res.json();
     setPushing(false);
     if (res.ok) {
+      setUser(prev => prev ? { ...prev, push_count: (prev.push_count ?? 0) + 1 } : prev);
       setPushMsg(`Article sent! ${data.remaining} push${data.remaining === 1 ? '' : 'es'} remaining.`);
       setTimeout(() => setPushMsg(''), 5000);
     } else {

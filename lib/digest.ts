@@ -55,15 +55,15 @@ export async function sendArticleToUser(userId: string, phone: string): Promise<
   if (upsertError) console.error('Upsert error:', upsertError);
   if (!savedArticle) return false;
 
-  await supabaseAdmin.from('user_articles').insert({
-    user_id: userId,
-    article_id: savedArticle.id,
-  });
-
   const base = process.env.NEXT_PUBLIC_BASE_URL;
   const articleLink = base ? `\n\n${base}/read/${savedArticle.id}` : '';
   const sms = `Athenaem: ${hook}\n\n"${chosen.title}"${articleLink}`;
   await sendSMS(phone, sms);
+
+  await supabaseAdmin.from('user_articles').insert({
+    user_id: userId,
+    article_id: savedArticle.id,
+  });
 
   return true;
 }

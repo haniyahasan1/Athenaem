@@ -67,7 +67,6 @@ async function fetchFromCrossRef(query: string): Promise<Article[]> {
 
   const data = await res.json();
   const items: CrossRefItem[] = data.message?.items ?? [];
-  console.log(`CrossRef returned ${items.length} results for "${query}"`);
 
   return items
     .filter((p) => p.title?.[0] && p.URL)
