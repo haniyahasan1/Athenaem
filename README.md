@@ -123,4 +123,4 @@ create table user_articles (
 
 ---
 
-*Built by Haniyah Hassan*
+*Built by Haniya Hasan*
